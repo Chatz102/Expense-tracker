@@ -12,3 +12,11 @@
 .category-progress-bar {
     background: aqua;
 }
+
+.expense-btn {
+    background-color: crimson;
+}
+
+.show-expense-btn {
+    background-color: greenyellow;
+}
