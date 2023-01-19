@@ -75,6 +75,9 @@ export const CategoriesProvider = ({children}) => {
         setTransaction(prevTransactions => {
             return prevTransactions.filter(transaction => transaction.id !== id)
         })
+        setTransactionHistory(prevTransactions => {
+            return prevTransactions.filter(transaction => transaction.id !== id)
+        })
     }
 
     return <CategoryContext.Provider value={{
