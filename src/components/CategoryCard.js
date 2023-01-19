@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Card, ProgressBar, Stack} from "react-bootstrap";
 import {currencyFormatter} from "../utils";
 
-const CategoryCard = ({name, amount, max}) => {
+const CategoryCard = ({name, amount, max, onAddTransactionClick, onTransactionHistoryClick}) => {
 
     function dynamicVariant(amount, max) {
         let ratio = (amount / max) * 100
@@ -12,9 +12,11 @@ const CategoryCard = ({name, amount, max}) => {
     }
 
     return (
-        <Card className="category-card">
+        <Card className="category-card" style={{
+            minWidth: "415px"
+        }}>
             <Card.Body>
-                <Card.Title className="pb-3">
+                <Card.Title className="pb-4">
                     <Stack direction="horizontal" gap="2" className="fw-normal">
                         <div className="me-auto">{name}</div>
                         <div className="d-flex align-items-baseline">
@@ -24,16 +26,16 @@ const CategoryCard = ({name, amount, max}) => {
                     </Stack>
                 </Card.Title>
                 <ProgressBar className="category-progress-bar rounded-pill" variant={dynamicVariant(amount, max)}
-                             now={amount} min={0} max={max} label={`${(amount / max) * 100}%`}/>
-                <Stack className="pt-3" direction="horizontal" gap="2">
+                             now={amount} min={0} max={max} label={`${Math.round((amount / max) * 100).toFixed(0)}%`}/>
+                <Stack className="pt-4" direction="horizontal" gap="2">
                     <Button className="expense-btn ms-auto" style={{
                         background: "chocolate",
                         borderColor: "#fff"
-                    }}>Add Expense</Button>
+                    }} onClick={onAddTransactionClick}>add Transaction</Button>
                     <Button className="show-expense-btn" style={{
                         background: "greenyellow",
                         borderColor: "#fff"
-                    }}>Show Expenses</Button>
+                    }} onClick={onTransactionHistoryClick}>Transaction History</Button>
                 </Stack>
             </Card.Body>
         </Card>
