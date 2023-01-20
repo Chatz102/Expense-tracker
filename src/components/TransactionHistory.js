@@ -1,12 +1,15 @@
 import {Button, Card, Col, Modal, Row} from "react-bootstrap";
 import {useCategories} from "../context/CategoryContexts";
 import {currencyFormatter} from "../utils";
+import "../styles/TransactionHistory.css";
+import {FaTrash} from "react-icons/fa";
 
 export default function TransactionHistory({show, handleClose, defaultCategoryId}) {
-    const {category, transactions, transactionHistory, deleteTransaction, deleteCategory} = useCategories();
+    const {category, transactions, transactionHistory, deleteTransaction} = useCategories();
 
     return (
-        <Modal show={show} onHide={handleClose} backdrop="static" scrollable="true">
+        <Modal className="transaction-history-modal" show={show} onHide={handleClose} backdrop="static"
+               scrollable="true">
             <Modal.Header closeButton>
                 <Modal.Title className="d-flex w-100">
                     <div className="me-auto">
@@ -18,14 +21,6 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                             return name;
                         })}
                     </div>
-                    <Button className="me-5" onClick={() => {
-                        deleteCategory({id: defaultCategoryId})
-                        handleClose();
-                    }} style={{
-                        background: "red",
-                        borderColor: "red",
-                        opacity: "0.5"
-                    }}>Delete</Button>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -43,7 +38,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
 
                     if (transaction.categoryId === defaultCategoryId) {
                         return (
-                            <Card key={transaction.id} className="m-2">
+                            <Card key={transaction.id} className="transaction-history-card m-2">
                                 <Card.Body>
                                     <Row>
                                         <Col lg={6} className="transactionId">
@@ -69,8 +64,9 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                                     </Row>
                                 </Card.Body>
                                 <div className="w-100 justify-content-end ps-3 pb-3">
-                                    <Button variant="danger" className="rounded-pill"
-                                            onClick={() => deleteTransaction(transaction.id)}>delete</Button>
+                                    <Button className="delete-btn"
+                                            onClick={() => deleteTransaction(transaction.id, transaction.transactionType, transaction.id, transaction.amount)}><FaTrash
+                                        className="trash-icon"/></Button>
                                 </div>
                             </Card>
                         )
@@ -90,7 +86,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
 
                     if (transaction.categoryId === defaultCategoryId) {
                         return (
-                            <Card key={transaction.id} className="m-2">
+                            <Card key={transaction.id} className="transaction-history-card m-2">
                                 <Card.Body>
                                     <Row>
                                         <Col lg={6} className="transactionId">
@@ -118,8 +114,9 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                                     </Row>
                                 </Card.Body>
                                 <div className=" d-flex w-100 justify-content-end pe-2 pb-2">
-                                    <Button variant="danger" className="rounded-pill"
-                                            onClick={() => deleteTransaction(transaction.id)}>delete</Button>
+                                    <Button className="delete-btn shadow-sm"
+                                            onClick={() => deleteTransaction(transaction.id, transaction.transactionType, transaction.id, transaction.amount)}><FaTrash
+                                        className="trash-icon"/></Button>
                                 </div>
                             </Card>
                         )

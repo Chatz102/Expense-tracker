@@ -1,0 +1,36 @@
+.category-card-body {
+    padding: 5px !important;
+}
+
+.category-progress-bar {
+    box-shadow: 0 .125rem .45rem rgba(0, 0, 0, .2);
+}
+
+.category-icon {
+    font-size: 50px;
+}
+
+.category-card {
+    font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    box-shadow: .225rem .225rem .45rem rgba(0, 0, 0, .2) !important;
+}
+
+.expense-btn {
+    background: chocolate !important;
+    border-color: #fff !important;
+    opacity: 0.9 !important;
+}
+
+.expense-btn:hover {
+    opacity: 1 !important;
+}
+
+.show-expense-btn {
+    background: #6baa0a !important;
+    border-color: #fff !important;
+    opacity: 0.9 !important;
+}
+
+.show-expense-btn:hover {
+    opacity: 1 !important;
+}

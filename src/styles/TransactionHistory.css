@@ -1,0 +1,23 @@
+.transaction-history-modal {
+    font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.delete-btn {
+    opacity: 0.5;
+    background-color: #fff !important;
+    border-color: #fff !important;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .5) !important;
+    max-height: 40px;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+.trash-icon {
+    color: red;
+}
+
+.transaction-history-card {
+    box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.3);
+}

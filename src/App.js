@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "./App.css";
-import {Button, Container, Stack} from "react-bootstrap";
+import {Container, Nav, Navbar, Offcanvas, Stack} from "react-bootstrap";
 import CategoryCard from "./components/CategoryCard";
 import AddCategory from "./components/AddCategory";
 import {useCategories} from "./context/CategoryContexts";
@@ -13,7 +13,7 @@ function App() {
     const [showTransactionHistoryModal, setShowTransactionHistoryModal] = useState(false);
     const [addTransactionModalCategoryId, setAddTransactionModelCategoryId] = useState();
     const [TransactionHistoryModalCategoryId, setTransactionHistoryModelCategoryId] = useState();
-    const {category, getCategoryTransactions} = useCategories();
+    const {category, transactions, getCategoryTransactions} = useCategories();
 
     function openAddTransactionModal(categoryId) {
         setShowAddTransactionModal(true);
@@ -28,28 +28,66 @@ function App() {
     return (
         <>
             <Container fluid className="app-container py-4 vh-100">
-                <Stack direction="horizontal" gap="2" className="mb-4">
-                    <h1 className="me-auto">Expense Tracker</h1>
-                    <Button className="category-btn" style={{
-                        background: "chocolate",
-                        borderColor: "chocolate"
-                    }} onClick={() => setShowAddCategoryModal(true)}>Add Category</Button>
-                </Stack>
+                <Navbar key={"lg"} expand={"sm"} className="top-nav mb-3">
+                    <Container fluid>
+                        <Navbar.Brand href="#"><h1 className="brand-color">Expense Tracker</h1></Navbar.Brand>
+                        <Navbar.Toggle className="navbar-toggle" aria-controls={`offcanvasNavbar-expand-${"lg"}`}/>
+                        <Navbar.Offcanvas
+                            id={`offcanvasNavbar-expand-${"lg"}`}
+                            aria-labelledby={`offcanvasNavbarLabel-expand-${"lg"}`}
+                            placement="end"
+                            className="offcanvas-nav"
+                        >
+                            <Offcanvas.Header closeButton>
+                                <Offcanvas.Title className="brand-color" id={`offcanvasNavbarLabel-expand-${"lg"}`}>
+                                    Expense Tracker
+                                </Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <Offcanvas.Body>
+                                <Nav className=" justify-content-end flex-grow-1 pe-3">
+                                    <Nav.Link className="brand-color" onClick={() => setShowAddCategoryModal(true)}>Add
+                                        Category</Nav.Link>
+                                </Nav>
+                            </Offcanvas.Body>
+                        </Navbar.Offcanvas>
+                    </Container>
+                </Navbar>
+                <div className="pt-2 pb-2">
+                    <h1 className="dashboard-label1 fw-normal text-white fs-3 pb-1">Categories</h1>
+                </div>
                 <div className="category-container pb-5">
                     {category.map(category => {
                         const amount = getCategoryTransactions(category.id).reduce((total, expense) => total + expense.amount, 0);
                         return (
                             <CategoryCard key={category.id}
+                                          Cid={category.id}
                                           name={category.name}
                                           amount={amount}
                                           max={category.max}
                                           onAddTransactionClick={() => openAddTransactionModal(category.id)}
                                           onTransactionHistoryClick={() => openTransactionHistoryModal(category.id)}
-
                             />
                         )
                     })}
                 </div>
+                <div className="recent-transaction-section-title">
+                    <h1 className="dashboard-label2 fw-normal fs-3 text-white mt-2 pb-1">Recent Transactions</h1>
+                </div>
+                <Stack direction="vertical" gap="2" className=" recent-transactions-section pt-2">
+                    {transactions.map(category => {
+                        const amount = getCategoryTransactions(category.id).reduce((total, expense) => total + expense.amount, 0);
+                        return (
+                            <CategoryCard key={category.id}
+                                          Cid={category.id}
+                                          name={category.name}
+                                          amount={amount}
+                                          max={category.max}
+                                          onAddTransactionClick={() => openAddTransactionModal(category.id)}
+                                          onTransactionHistoryClick={() => openTransactionHistoryModal(category.id)}
+                            />
+                        )
+                    })}
+                </Stack>
             </Container>
             <AddCategory show={showAddCategoryModal} handleClose={() => setShowAddCategoryModal(false)}/>
             <AddTransaction show={showAddTransactionModal} handleClose={() => setShowAddTransactionModal(false)}

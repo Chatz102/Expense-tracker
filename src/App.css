@@ -1,14 +1,102 @@
+#root {
+    background-image: url("../public/images/Mountain-8K.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: auto;
+}
+
 .category-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1rem;
     align-items: flex-start;
 }
 
-.app-container {
-    background-color: azure;
+.top-nav {
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    color: white !important;
+    box-shadow: -.225rem .225rem .35rem rgba(0, 0, 0, .5) !important;
+    backdrop-filter: blur(2px) !important;
 }
 
-.delete-btn:hover {
-    opacity: 1;
+.offcanvas-nav {
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: white !important;
+}
+
+.offcanvas-header > .btn-close {
+    color: white !important;
+    background: transparent url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' fill=%27%23000%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e") center/1em auto no-repeat !important;
+}
+
+.app-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.recent-transaction-section-title {
+    border-top: #02173c solid 10px;
+}
+
+
+.brand-color {
+    transition: ease 0.3s;
+    color: white !important;
+}
+
+.brand-color:hover {
+    color: beige !important;
+}
+
+.navbar-toggle {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.5) !important;
+    transition: 0.3s ease-in-out !important;
+}
+
+.navbar-toggle:hover {
+    border: 1px solid rgba(255, 255, 255, 1) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+    transition: 0.3s ease-in-out !important;
+}
+
+.navbar-toggler-icon:hover {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)'  d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.card {
+    border-color: #fff !important;
+}
+
+.offcanvas.offcanvas-end {
+    width: 270px !important;
+}
+
+.dashboard-label1 {
+    background: rgba(0, 0, 0, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px);
+    max-width: 165px;
+    border-radius: 10px;
+    box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);
+    padding: 5px;
+}
+
+.dashboard-label2 {
+    background: rgba(0, 0, 0, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px);
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);
+    padding: 5px;
+}
+
+@media (max-width: 575px) {
+    .offcanvas-nav {
+        backdrop-filter: blur(8px);
+    }
 }

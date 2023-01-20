@@ -65,10 +65,33 @@ export const CategoriesProvider = ({children}) => {
         })
     }
 
-    function deleteCategory({id}) {
+    function deleteCategory({id, transactionType, categoryId, amount}) {
         setCategory(prevCategories => {
             return prevCategories.filter(category => category.id !== id)
         })
+        if (transactionType === "2") {
+            setCategory(foundCategory => {
+                //Loop through category ids
+                foundCategory.forEach(category => {
+                    if (category.id === categoryId) {
+                        category.max = category.max - amount;
+                    }
+                })
+                localStorage.setItem("categories", JSON.stringify(foundCategory))
+                return foundCategory;
+            })
+        } else if (transactionType === "3") {
+            setCategory(foundCategory => {
+                //Loop through category ids
+                foundCategory.forEach(category => {
+                    if (category.id === categoryId) {
+                        category.max = category.max + amount;
+                    }
+                })
+                localStorage.setItem("categories", JSON.stringify(foundCategory))
+                return foundCategory;
+            })
+        }
     }
 
     function deleteTransaction(id) {

@@ -1,6 +1,7 @@
 import {Button, Form, Modal} from "react-bootstrap";
 import {useRef} from "react";
 import {useCategories} from "../context/CategoryContexts";
+import "../styles/AddCategory.css";
 
 export default function AddCategory({show, handleClose}) {
     const nameRef = useRef();
@@ -17,7 +18,7 @@ export default function AddCategory({show, handleClose}) {
     }
 
     return (
-        <Modal show={show} onHide={handleClose} backdrop="static">
+        <Modal className="add-category-modal" show={show} onHide={handleClose} backdrop="static">
             <Form onSubmit={handleSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Category</Modal.Title>
@@ -25,14 +26,14 @@ export default function AddCategory({show, handleClose}) {
                 <Modal.Body>
                     <Form.Group controlId="name">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control ref={nameRef} type="text" required/>
+                        <Form.Control className="shadow-sm" ref={nameRef} type="text" required/>
                     </Form.Group>
                     <Form.Group className="pt-3 pb-5" controlId="max">
                         <Form.Label>Maximum Spending Amount</Form.Label>
-                        <Form.Control ref={maxRef} type="number" required min={0} step={0.01}/>
+                        <Form.Control className="shadow-sm" ref={maxRef} type="number" required min={0} step={0.01}/>
                     </Form.Group>
                     <div className="d-flex justify-content-end">
-                        <Button type="submit" variant="outline-success">Add</Button>
+                        <Button className="shadow-sm" type="submit" variant="outline-success">Add</Button>
                     </div>
                 </Modal.Body>
             </Form>
