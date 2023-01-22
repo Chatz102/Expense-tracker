@@ -14,7 +14,7 @@ function App() {
     const [showTransactionHistoryModal, setShowTransactionHistoryModal] = useState(false);
     const [addTransactionModalCategoryId, setAddTransactionModelCategoryId] = useState();
     const [TransactionHistoryModalCategoryId, setTransactionHistoryModelCategoryId] = useState();
-    const {category, transactionHistory, getCategoryTransactions} = useCategories();
+    const {category, transactionHistory, getCategoryTransactions, getTransactionHistoryTransactions} = useCategories();
 
     function openAddTransactionModal(categoryId) {
         setShowAddTransactionModal(true);
@@ -47,6 +47,7 @@ function App() {
                             <Offcanvas.Body>
                                 <Nav className=" justify-content-end flex-grow-1 pe-3">
                                     <Nav.Link className="brand-color" onClick={() => setShowAddCategoryModal(true)}>Add
+                                        Expense
                                         Category</Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>
@@ -75,13 +76,13 @@ function App() {
                     <h1 className="dashboard-label2 fw-normal fs-3 text-white mt-2 pb-1">Recent Transactions</h1>
                 </div>
                 <div className="recent-transactions-section pt-2 pb-5">
-                    {transactionHistory.slice(0, 5).map(transaction => {
-                        const amount = getCategoryTransactions(category.id).reduce((total, expense) => total + expense.amount, 0);
+                    {transactionHistory.sort((a, b) => a.time < b.time ? 1 : -1).slice(0, 5).map(transaction => {
+                        const amount = getTransactionHistoryTransactions(transaction.id).reduce((total, expense) => total + expense.amount, 0);
                         return (
                             <RecentTransaction key={transaction.id}
                                                Cid={transaction.categoryId}
                                                transactionType={transaction.transactionType}
-                                               name={transaction.description}
+                                               time={transaction.time}
                                                date={transaction.date}
                                                amount={amount}
                                                onTransactionHistoryClick={() => openTransactionHistoryModal(category.id)}

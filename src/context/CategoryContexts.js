@@ -18,15 +18,19 @@ export const CategoriesProvider = ({children}) => {
         return transactions.filter(transaction => transaction.categoryId === categoryId)
     }
 
+    function getTransactionHistoryTransactions(transactionId) {
+        return transactionHistory.filter(transaction => transaction.id === transactionId)
+    }
+
     //create new expenses record
-    function addTransaction({transactionType, description, amount, categoryId, date}) {
+    function addTransaction({transactionType, description, amount, categoryId, date, time}) {
         let theId = uuidv4();
         if (transactionType === "1") {
             setTransaction(prevTransactions => {
-                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date}]
+                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date, time}]
             })
             setTransactionHistory(prevTransactions => {
-                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date}];
+                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date, time}];
             })
         } else if (transactionType === "2") {
             setCategory(foundCategory => {
@@ -40,7 +44,15 @@ export const CategoriesProvider = ({children}) => {
                 return foundCategory;
             })
             setTransactionHistory(prevTransactions => {
-                return [...prevTransactions, {id: uuidv4(), transactionType, description, amount, categoryId, date}];
+                return [...prevTransactions, {
+                    id: uuidv4(),
+                    transactionType,
+                    description,
+                    amount,
+                    categoryId,
+                    date,
+                    time
+                }];
             })
         } else if (transactionType === "3") {
             setCategory(foundCategory => {
@@ -54,14 +66,18 @@ export const CategoriesProvider = ({children}) => {
                 return foundCategory;
             })
             setTransactionHistory(prevTransactions => {
-                return [...prevTransactions, {id: uuidv4(), transactionType, description, amount, categoryId, date}]
+                return [...prevTransactions, {
+                    id: uuidv4(),
+                    transactionType,
+                    description,
+                    amount,
+                    categoryId,
+                    date,
+                    time
+                }]
             })
         }
     }
-
-    // function deleteOtherTransactions({transactionType, description, amount, categoryId, date}) {
-    //
-    // }
 
     //creates new financial category
     function addCategory({name, max}) {
@@ -73,9 +89,15 @@ export const CategoriesProvider = ({children}) => {
         })
     }
 
-    function deleteCategory({id, transactionType}) {
+    function deleteCategory({id}) {
         setCategory(prevCategories => {
             return prevCategories.filter(category => category.id !== id)
+        })
+        setTransaction(prevTransactions => {
+            return prevTransactions.filter(transaction => transaction.categoryId !== id)
+        })
+        setTransactionHistory(prevTransactions => {
+            return prevTransactions.filter(transaction => transaction.categoryId !== id)
         })
 
     }
@@ -87,6 +109,39 @@ export const CategoriesProvider = ({children}) => {
         setTransactionHistory(prevTransactions => {
             return prevTransactions.filter(transaction => transaction.id !== id)
         })
+        transactionHistory.forEach(transactions => {
+            if (transactions.id === id) {
+                deleteOtherTransactions(transactions.transactionType, transactions.amount, transactions.categoryId)
+            }
+            return true
+        })
+
+    }
+
+    function deleteOtherTransactions(transactionType, amount, categoryId) {
+        if (transactionType === "2") {
+            setCategory(foundCategory => {
+                //Loop through category ids
+                foundCategory.forEach(category => {
+                    if (category.id === categoryId) {
+                        category.max = category.max - amount / 2;
+                    }
+                })
+                localStorage.setItem("categories", JSON.stringify(foundCategory))
+                return foundCategory;
+            })
+        } else if (transactionType === "3") {
+            setCategory(foundCategory => {
+                //Loop through category ids
+                foundCategory.forEach(category => {
+                    if (category.id === categoryId) {
+                        category.max = category.max + amount / 2;
+                    }
+                })
+                localStorage.setItem("categories", JSON.stringify(foundCategory))
+                return foundCategory;
+            })
+        }
     }
 
     return <CategoryContext.Provider value={{
@@ -94,10 +149,12 @@ export const CategoriesProvider = ({children}) => {
         transactions,
         transactionHistory,
         getCategoryTransactions,
+        getTransactionHistoryTransactions,
         addTransaction,
         addCategory,
         deleteCategory,
-        deleteTransaction
+        deleteTransaction,
+        deleteOtherTransactions
     }}>
         {children}
     </CategoryContext.Provider>

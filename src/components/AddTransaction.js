@@ -14,13 +14,15 @@ export default function AddTransaction({show, handleClose, defaultCategoryId}) {
         e.preventDefault();
         let dateObj = new Date()
         let currentDate = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear() + "";
+        let currentTime = dateObj.getHours() + ":" + (dateObj.getMinutes() + 1) + ":" + dateObj.getSeconds() + "";
 
         addTransaction({
             transactionType: typeRef.current.value,
             description: descriptionRef.current.value,
             amount: parseFloat(amountRef.current.value),
             categoryId: categoryIdRef.current.value,
-            date: currentDate
+            date: currentDate,
+            time: currentTime
         })
         handleClose();
     }

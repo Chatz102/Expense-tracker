@@ -63,7 +63,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                                         </Col>
                                     </Row>
                                 </Card.Body>
-                                <div className="w-100 justify-content-end ps-3 pb-3">
+                                <div className="w-100 d-flex justify-content-end ps-3 pb-3 pe-2">
                                     <Button className="delete-btn"
                                             onClick={() => deleteTransaction(transaction.id)}><FaTrash
                                         className="trash-icon"/></Button>

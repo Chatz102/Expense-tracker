@@ -2,25 +2,30 @@ import React from 'react';
 import {Card, Stack} from "react-bootstrap";
 import {useCategories} from "../context/CategoryContexts";
 import "../styles/RecentTransaction.css"
+import {currencyFormatter} from "../utils";
 
-const RecentTransaction = ({Cid, transactionType, name, date, amount, onTransactionHistoryClick}) => {
+const RecentTransaction = ({Cid, transactionType, time, date, amount, onTransactionHistoryClick}) => {
     const {category} = useCategories();
     let transaction_type;
     let divColor;
     let textColor;
+    let sign;
 
     if (transactionType === "1") {
         transaction_type = "Expense";
         divColor = "#EDAA25"
         textColor = "#fff"
+        sign = "-";
     } else if (transactionType === "2") {
         transaction_type = "Deposit";
         divColor = "#0A7373";
         textColor = "#fff"
+        sign = "+";
     } else if (transactionType === "3") {
         transaction_type = "Withdrawl";
         divColor = "#C43302";
         textColor = "#fff"
+        sign = "-";
     }
 
     const divStyle = {
@@ -49,7 +54,10 @@ const RecentTransaction = ({Cid, transactionType, name, date, amount, onTransact
                         </p>
                     </div>
                 </Stack>
-                <div className="d-flex align-items-center">{date}</div>
+                <div>
+                    <div className="d-flex align-items-center pb-2">{date} {time}</div>
+                    <div>{sign}{currencyFormatter.format(amount)}</div>
+                </div>
             </Card.Body>
         </Card>
     );
