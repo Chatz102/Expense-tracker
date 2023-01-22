@@ -1,52 +1,55 @@
 import React from 'react';
-import {Button, Card, ProgressBar, Stack} from "react-bootstrap";
-import {currencyFormatter} from "../utils";
-import {FaMoneyCheckAlt, FaTrash} from "react-icons/fa";
+import {Card, Stack} from "react-bootstrap";
 import {useCategories} from "../context/CategoryContexts";
 import "../styles/RecentTransaction.css"
 
-const RecentTransaction = ({Cid, name, amount, max, onAddTransactionClick, onTransactionHistoryClick}) => {
-    const {deleteCategory} = useCategories();
+const RecentTransaction = ({Cid, transactionType, name, date, amount, onTransactionHistoryClick}) => {
+    const {category} = useCategories();
+    let transaction_type;
+    let divColor;
+    let textColor;
 
-    function dynamicVariant(amount, max) {
-        let ratio = (amount / max) * 100
-        if (ratio < 50) return "info";
-        if (ratio > 50 && ratio < 90) return "warning";
-        return "danger";
+    if (transactionType === "1") {
+        transaction_type = "Expense";
+        divColor = "#EDAA25"
+        textColor = "#fff"
+    } else if (transactionType === "2") {
+        transaction_type = "Deposit";
+        divColor = "#0A7373";
+        textColor = "#fff"
+    } else if (transactionType === "3") {
+        transaction_type = "Withdrawl";
+        divColor = "#C43302";
+        textColor = "#fff"
     }
 
+    const divStyle = {
+        backgroundColor: divColor,
+        color: textColor,
+        border: "1px solid " + divColor
+    };
+
+
     return (
-        <Card className="recent-Transaction-Card">
-            <Card.Body className="category-card-body">
-                <Card.Title className="pb-4">
-                    <Stack direction="vertical" gap="2" className="fw-normal">
-                        <div className="d-flex">
-                            <p className="me-auto"><FaMoneyCheckAlt className="category-icon"/> {name}</p>
-                            <Button className="ms-2 delete-btn" onClick={() => {
-                                deleteCategory({id: Cid})
-                            }}><FaTrash className="trash-icon"/></Button>
-                        </div>
-                        <div className="d-flex align-items-baseline">
-                            {currencyFormatter.format(amount)}
-                            <span className="text-muted fs-6 ps-1">/ {currencyFormatter.format(max)}</span>
-                        </div>
-                    </Stack>
-                </Card.Title>
-                <ProgressBar className="category-progress-bar rounded-pill h-25" variant={dynamicVariant(amount, max)}
-                             now={amount} min={0} max={max} label={`${Math.round((amount / max) * 100).toFixed(0)}%`}
-                />
-                <Stack className="pt-4" direction="horizontal" gap="2">
-                    <Button className="expense-btn ms-auto" style={{
-                        background: "chocolate",
-                        borderColor: "#fff",
-                        opacity: "0.9"
-                    }} onClick={onAddTransactionClick}>add Transaction</Button>
-                    <Button className="show-expense-btn" style={{
-                        background: "greenyellow",
-                        borderColor: "#fff",
-                        opacity: "0.9"
-                    }} onClick={onTransactionHistoryClick}>Transaction History</Button>
+        <Card onClick={onTransactionHistoryClick} className="recent-Transaction-Card mt-3"
+              style={divStyle}
+        >
+            <Card.Body className="Recent-card-body d-flex">
+                <Stack className="me-auto" direction="horizontal" gap="2">
+                    <div>
+                        <h6>{transaction_type}</h6>
+                        <p className="recent-category-title">
+                            {category.map(category => {
+                                let name;
+                                if (category.id === Cid) {
+                                    name = category.name;
+                                }
+                                return name;
+                            })}
+                        </p>
+                    </div>
                 </Stack>
+                <div className="d-flex align-items-center">{date}</div>
             </Card.Body>
         </Card>
     );

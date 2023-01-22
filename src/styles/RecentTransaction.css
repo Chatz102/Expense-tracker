@@ -1,3 +1,13 @@
 .recent-Transaction-Card {
     font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    max-width: 320px;
+    border-color: transparent !important;
+}
+
+.Recent-card-body {
+    padding: 6px !important;
+}
+
+.recent-category-title {
+    margin-bottom: 2px !important;
 }

@@ -20,9 +20,13 @@ export const CategoriesProvider = ({children}) => {
 
     //create new expenses record
     function addTransaction({transactionType, description, amount, categoryId, date}) {
+        let theId = uuidv4();
         if (transactionType === "1") {
             setTransaction(prevTransactions => {
-                return [...prevTransactions, {id: uuidv4(), transactionType, description, amount, categoryId, date}]
+                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date}]
+            })
+            setTransactionHistory(prevTransactions => {
+                return [...prevTransactions, {id: theId, transactionType, description, amount, categoryId, date}];
             })
         } else if (transactionType === "2") {
             setCategory(foundCategory => {
@@ -55,6 +59,10 @@ export const CategoriesProvider = ({children}) => {
         }
     }
 
+    // function deleteOtherTransactions({transactionType, description, amount, categoryId, date}) {
+    //
+    // }
+
     //creates new financial category
     function addCategory({name, max}) {
         setCategory(prevCategory => {
@@ -65,33 +73,11 @@ export const CategoriesProvider = ({children}) => {
         })
     }
 
-    function deleteCategory({id, transactionType, categoryId, amount}) {
+    function deleteCategory({id, transactionType}) {
         setCategory(prevCategories => {
             return prevCategories.filter(category => category.id !== id)
         })
-        if (transactionType === "2") {
-            setCategory(foundCategory => {
-                //Loop through category ids
-                foundCategory.forEach(category => {
-                    if (category.id === categoryId) {
-                        category.max = category.max - amount;
-                    }
-                })
-                localStorage.setItem("categories", JSON.stringify(foundCategory))
-                return foundCategory;
-            })
-        } else if (transactionType === "3") {
-            setCategory(foundCategory => {
-                //Loop through category ids
-                foundCategory.forEach(category => {
-                    if (category.id === categoryId) {
-                        category.max = category.max + amount;
-                    }
-                })
-                localStorage.setItem("categories", JSON.stringify(foundCategory))
-                return foundCategory;
-            })
-        }
+
     }
 
     function deleteTransaction(id) {

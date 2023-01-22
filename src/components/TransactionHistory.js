@@ -65,7 +65,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                                 </Card.Body>
                                 <div className="w-100 justify-content-end ps-3 pb-3">
                                     <Button className="delete-btn"
-                                            onClick={() => deleteTransaction(transaction.id, transaction.transactionType, transaction.id, transaction.amount)}><FaTrash
+                                            onClick={() => deleteTransaction(transaction.id)}><FaTrash
                                         className="trash-icon"/></Button>
                                 </div>
                             </Card>
@@ -84,7 +84,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                         transactionType = "WithDrawl"
                     }
 
-                    if (transaction.categoryId === defaultCategoryId) {
+                    if (transaction.categoryId === defaultCategoryId && transaction.transactionType !== "1") {
                         return (
                             <Card key={transaction.id} className="transaction-history-card m-2">
                                 <Card.Body>
@@ -115,7 +115,7 @@ export default function TransactionHistory({show, handleClose, defaultCategoryId
                                 </Card.Body>
                                 <div className=" d-flex w-100 justify-content-end pe-2 pb-2">
                                     <Button className="delete-btn shadow-sm"
-                                            onClick={() => deleteTransaction(transaction.id, transaction.transactionType, transaction.id, transaction.amount)}><FaTrash
+                                            onClick={() => deleteTransaction(transaction.id, transaction.transactionType)}><FaTrash
                                         className="trash-icon"/></Button>
                                 </div>
                             </Card>

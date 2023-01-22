@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import "./App.css";
-import {Container, Nav, Navbar, Offcanvas, Stack} from "react-bootstrap";
+import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import CategoryCard from "./components/CategoryCard";
 import AddCategory from "./components/AddCategory";
 import {useCategories} from "./context/CategoryContexts";
 import AddTransaction from "./components/AddTransaction";
 import TransactionHistory from "./components/TransactionHistory";
+import RecentTransaction from "./components/RecentTransaction";
 
 function App() {
     const [showAddCategoryModal, setShowAddCategoryModal] = useState(false);
@@ -13,7 +14,7 @@ function App() {
     const [showTransactionHistoryModal, setShowTransactionHistoryModal] = useState(false);
     const [addTransactionModalCategoryId, setAddTransactionModelCategoryId] = useState();
     const [TransactionHistoryModalCategoryId, setTransactionHistoryModelCategoryId] = useState();
-    const {category, transactions, getCategoryTransactions} = useCategories();
+    const {category, transactionHistory, getCategoryTransactions} = useCategories();
 
     function openAddTransactionModal(categoryId) {
         setShowAddTransactionModal(true);
@@ -27,7 +28,7 @@ function App() {
 
     return (
         <>
-            <Container fluid className="app-container py-4 vh-100">
+            <Container className="app-container py-4 vh-100">
                 <Navbar key={"lg"} expand={"sm"} className="top-nav mb-3">
                     <Container fluid>
                         <Navbar.Brand href="#"><h1 className="brand-color">Expense Tracker</h1></Navbar.Brand>
@@ -73,21 +74,21 @@ function App() {
                 <div className="recent-transaction-section-title">
                     <h1 className="dashboard-label2 fw-normal fs-3 text-white mt-2 pb-1">Recent Transactions</h1>
                 </div>
-                <Stack direction="vertical" gap="2" className=" recent-transactions-section pt-2">
-                    {transactions.map(category => {
+                <div className="recent-transactions-section pt-2 pb-5">
+                    {transactionHistory.slice(0, 5).map(transaction => {
                         const amount = getCategoryTransactions(category.id).reduce((total, expense) => total + expense.amount, 0);
                         return (
-                            <CategoryCard key={category.id}
-                                          Cid={category.id}
-                                          name={category.name}
-                                          amount={amount}
-                                          max={category.max}
-                                          onAddTransactionClick={() => openAddTransactionModal(category.id)}
-                                          onTransactionHistoryClick={() => openTransactionHistoryModal(category.id)}
+                            <RecentTransaction key={transaction.id}
+                                               Cid={transaction.categoryId}
+                                               transactionType={transaction.transactionType}
+                                               name={transaction.description}
+                                               date={transaction.date}
+                                               amount={amount}
+                                               onTransactionHistoryClick={() => openTransactionHistoryModal(category.id)}
                             />
                         )
                     })}
-                </Stack>
+                </div>
             </Container>
             <AddCategory show={showAddCategoryModal} handleClose={() => setShowAddCategoryModal(false)}/>
             <AddTransaction show={showAddTransactionModal} handleClose={() => setShowAddTransactionModal(false)}
