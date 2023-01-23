@@ -3,6 +3,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: 100vh;
     overflow: auto;
 }
 
@@ -42,12 +43,13 @@
 
 
 .brand-color {
-    transition: ease 0.3s;
+    transition: ease 0.3s !important;
     color: white !important;
+    text-decoration: none !important;
 }
 
 .brand-color:hover {
-    color: beige !important;
+    color: orange !important;
 }
 
 .navbar-toggle {
@@ -79,7 +81,7 @@
 
 .dashboard-label1 {
     background: rgba(0, 0, 0, 0.5) !important;
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     max-width: 165px;
     border-radius: 10px;
     box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);
@@ -88,7 +90,7 @@
 
 .dashboard-label2 {
     background: rgba(0, 0, 0, 0.5) !important;
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     max-width: 300px;
     border-radius: 10px;
     box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);

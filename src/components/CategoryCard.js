@@ -5,7 +5,7 @@ import {FaMoneyCheckAlt, FaTrash} from "react-icons/fa";
 import {useCategories} from "../context/CategoryContexts";
 import "../styles/CategoryCard.css"
 
-const CategoryCard = ({Cid, name, amount, max, onAddTransactionClick, onTransactionHistoryClick}) => {
+const CategoryCard = ({Cid, name, amount, max}) => {
     const {deleteCategory} = useCategories();
 
     function dynamicVariant(amount, max) {
@@ -25,7 +25,7 @@ const CategoryCard = ({Cid, name, amount, max, onAddTransactionClick, onTransact
                         <div className="d-flex">
                             <p className="me-auto"><FaMoneyCheckAlt className="category-icon"/> {name}</p>
                             <Button className="ms-2 delete-btn" onClick={() => {
-                                deleteCategory({id: Cid})
+                                deleteCategory({id: Cid, name})
                             }}><FaTrash className="trash-icon"/></Button>
                         </div>
                         <div className="d-flex align-items-baseline">
@@ -34,14 +34,13 @@ const CategoryCard = ({Cid, name, amount, max, onAddTransactionClick, onTransact
                         </div>
                     </Stack>
                 </Card.Title>
-                <ProgressBar className="category-progress-bar rounded-pill h-25" variant={dynamicVariant(amount, max)}
-                             now={amount} min={0} max={max} label={`${Math.round((amount / max) * 100).toFixed(0)}%`}
-                />
-                <Stack className="pt-4" direction="horizontal" gap="2">
-                    <Button className="expense-btn ms-auto" onClick={onAddTransactionClick}>add Transaction</Button>
-                    <Button className="show-expense-btn" onClick={onTransactionHistoryClick}>Transaction
-                        History</Button>
-                </Stack>
+                <div className="pb-3">
+                    <ProgressBar className="category-progress-bar rounded-pill h-25"
+                                 variant={dynamicVariant(amount, max)}
+                                 now={amount} min={0} max={max}
+                                 label={`${Math.round((amount / max) * 100).toFixed(0)}%`}
+                    />
+                </div>
             </Card.Body>
         </Card>
     );

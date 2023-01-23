@@ -1,3 +1,34 @@
 .add-transaction-modal {
     font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: white;
+}
+
+.add-transaction-btn {
+    background-color: #651C32 !important;
+    border-color: #651C32 !important;
+    color: white !important;
+    transition: ease-in-out .33s !important;
+}
+
+.add-transaction-btn:hover {
+    background-color: rgba(101, 28, 50, 0.8) !important;
+    border-color: rgba(101, 28, 50, 0.8) !important;
+}
+
+.add-transaction-title {
+    color: white !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 10px;
+    box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);
+    padding: 5px;
+}
+
+.add-transaction-label {
+    color: white !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 10px;
+    box-shadow: 0 0.2rem 0.5rem rgb(0, 0, 0, 50%);
+    padding: 5px;
 }
