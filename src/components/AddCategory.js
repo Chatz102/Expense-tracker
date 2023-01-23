@@ -41,8 +41,9 @@ export default function AddCategory() {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <div className="d-flex justify-content-end">
-                        <Button className="shadow-sm" type="submit" onSubmit={handleSubmit}>Add Category</Button>
+                    <div className="d-flex justify-content-center">
+                        <Button className="shadow-sm add-category-btn" type="submit" onSubmit={handleSubmit}>Add
+                            Category</Button>
                     </div>
                 </Form>
             </div>

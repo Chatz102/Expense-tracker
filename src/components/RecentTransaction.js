@@ -4,7 +4,7 @@ import {useCategories} from "../context/CategoryContexts";
 import "../styles/RecentTransaction.css"
 import {currencyFormatter} from "../utils";
 
-const RecentTransaction = ({Cid, transactionType, time, date, amount, onTransactionHistoryClick}) => {
+const RecentTransaction = ({Cname, transactionType, time, date, amount, onTransactionHistoryClick}) => {
     const {category} = useCategories();
     let transaction_type;
     let divColor;
@@ -46,7 +46,7 @@ const RecentTransaction = ({Cid, transactionType, time, date, amount, onTransact
                         <p className="recent-category-title">
                             {category.map(category => {
                                 let name;
-                                if (category.id === Cid) {
+                                if (category.name === Cname) {
                                     name = category.name;
                                 }
                                 return name;

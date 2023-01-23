@@ -1,14 +1,48 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "./App.css";
-import {Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes, useLocation} from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import AddTransaction from "./components/AddTransaction";
 import TransactionHistory from "./components/TransactionHistory";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import NotFound from "./components/NotFound";
 import AddCategory from "./components/AddCategory";
+import $ from "jquery";
 
 function App() {
+    const location = useLocation()
+    // ...
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/":
+                $("#dashboard").css("cssText", "color:orange !important");
+                $("#addCategory").css("cssText", "color:white !important");
+                $("#addTransaction").css("cssText", "color:white !important");
+                $("#transactionHistory").css("cssText", "color:white !important");
+                break;
+            case "/addCategory":
+                $("#dashboard").css("cssText", "color:white !important");
+                $("#addCategory").css("cssText", "color:orange !important");
+                $("#addTransaction").css("cssText", "color:white !important");
+                $("#transactionHistory").css("cssText", "color:white !important");
+                break;
+            case "/addTransaction":
+                $("#dashboard").css("cssText", "color:white !important");
+                $("#addCategory").css("cssText", "color:white !important");
+                $("#addTransaction").css("cssText", "color:orange !important");
+                $("#transactionHistory").css("cssText", "color:white !important");
+                break;
+            case "/transactionHistory":
+                $("#dashboard").css("cssText", "color:white !important");
+                $("#addCategory").css("cssText", "color:white !important");
+                $("#addTransaction").css("cssText", "color:white !important");
+                $("#transactionHistory").css("cssText", "color:orange !important");
+                break;
+            default:
+                break;
+        }
+    }, [location])
+
     return (
         <>
             <Navbar id="theNavbar" key={"lg"} expand={"md"} className="top-nav mb-3">
@@ -28,17 +62,17 @@ function App() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className=" justify-content-end flex-grow-1">
-                                <Link to="/" className="brand-color nav-link">
+                                <Link id="dashboard" to="/" className="brand-color nav-link">
                                     Dashboard
                                 </Link>
-                                <Link to="/addCategory" className="brand-color nav-link">Add
+                                <Link id="addCategory" to="/addCategory" className="brand-color nav-link">Add
                                     Expense
                                     Category
                                 </Link>
-                                <Link to="/addTransaction" className="brand-color nav-link">New
+                                <Link id="addTransaction" to="/addTransaction" className="brand-color nav-link">New
                                     Transaction
                                 </Link>
-                                <Link to="/transactionHistory" className="brand-color nav-link">Transaction
+                                <Link id="transactionHistory" to="/transactionHistory" className="brand-color nav-link">Transaction
                                     History
                                 </Link>
                             </Nav>

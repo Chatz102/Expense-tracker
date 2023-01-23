@@ -11,8 +11,8 @@
 }
 
 .add-transaction-btn:hover {
-    background-color: rgba(101, 28, 50, 0.8) !important;
-    border-color: rgba(101, 28, 50, 0.8) !important;
+    background-color: rgba(101, 28, 50, 0.6) !important;
+    border-color: rgba(101, 28, 50, 0.6) !important;
 }
 
 .add-transaction-title {

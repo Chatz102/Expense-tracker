@@ -35,7 +35,7 @@ const Dashboard = () => {
                         const amount = getTransactionHistoryTransactions(transaction.id).reduce((total, expense) => total + expense.amount, 0);
                         return (
                             <RecentTransaction key={transaction.id}
-                                               Cid={transaction.categoryId}
+                                               Cname={transaction.categoryName}
                                                transactionType={transaction.transactionType}
                                                time={transaction.time}
                                                date={transaction.date}

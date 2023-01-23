@@ -1,6 +1,5 @@
 .add-category-container {
     font-family: -apple-system, BlinkMacSystemFont, "Poppins", sans-serif, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
 }
 
 .add-category-title {
@@ -27,4 +26,16 @@
     color: white !important;
     justify-content: center !important;
     align-items: center !important;
+}
+
+.add-category-btn {
+    background-color: #651C32 !important;
+    border-color: #651C32 !important;
+    color: white !important;
+    transition: ease-in-out .33s !important;
+}
+
+.add-category-btn:hover {
+    background-color: rgba(101, 28, 50, 0.6) !important;
+    border-color: rgba(101, 28, 50, 0.6) !important;
 }

@@ -106,7 +106,6 @@ export const CategoriesProvider = ({children}) => {
     }
 
     function deleteCategory({id, name}) {
-        console.log(name);
         setCategory(prevCategories => {
             return prevCategories.filter(category => category.id !== id)
         })
@@ -119,7 +118,7 @@ export const CategoriesProvider = ({children}) => {
 
     }
 
-    function deleteTransaction(id, name) {
+    function deleteTransaction(id) {
         setTransaction(prevTransactions => {
             return prevTransactions.filter(transaction => transaction.id !== id)
         })
@@ -128,7 +127,7 @@ export const CategoriesProvider = ({children}) => {
         })
         transactionHistory.forEach(transactions => {
             if (transactions.id === id) {
-                deleteOtherTransactions(transactions.transactionType, transactions.amount, transactions.name)
+                deleteOtherTransactions(transactions.transactionType, transactions.amount, transactions.categoryName)
             }
             return true
         })
