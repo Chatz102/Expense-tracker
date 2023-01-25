@@ -8,6 +8,7 @@ import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import NotFound from "./components/NotFound";
 import AddCategory from "./components/AddCategory";
 import $ from "jquery";
+import {FaBookmark, FaBookOpen, FaHome, FaMoneyBill} from "react-icons/fa";
 
 function App() {
     const location = useLocation()
@@ -52,7 +53,7 @@ function App() {
         <>
             <Navbar id="theNavbar" key={"lg"} expand={"md"} className="top-nav mb-3">
                 <Container fluid>
-                    <Navbar.Brand href="#"><h1 className="brand-color">Expense Tracker</h1></Navbar.Brand>
+                    <Link to="/" className="navbar-brand"><h1 className="brand-color">Expense Tracker</h1></Link>
                     <Navbar.Toggle className="navbar-toggle" aria-controls={`offcanvasNavbar-expand-${"md"}`}/>
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar-expand-${"md"}`}
@@ -67,17 +68,18 @@ function App() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className=" justify-content-end flex-grow-1">
-                                <Link id="dashboard" to="/" className="brand-color nav-link">
-                                    Dashboard
+                                <Link id="dashboard" to="/" className="brand-color nav-link"><FaHome/> Dashboard
                                 </Link>
-                                <Link id="addCategory" to="/addCategory" className="brand-color nav-link">Add
+                                <Link id="addCategory" to="/addCategory"
+                                      className="brand-color nav-link"><FaBookOpen/> Add
                                     Expense
                                     Category
                                 </Link>
-                                <Link id="addTransaction" to="/addTransaction" className="brand-color nav-link">New
+                                <Link id="addTransaction" to="/addTransaction"
+                                      className="brand-color nav-link"><FaMoneyBill/> New
                                     Transaction
                                 </Link>
-                                <Link id="transactionHistory" to="/transactionHistory" className="brand-color nav-link">Transaction
+                                <Link id="transactionHistory" to="/transactionHistory" className="brand-color nav-link"><FaBookmark/>Transaction
                                     History
                                 </Link>
                             </Nav>
