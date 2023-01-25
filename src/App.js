@@ -11,32 +11,37 @@ import $ from "jquery";
 
 function App() {
     const location = useLocation()
+    let dashboard = $("#dashboard");
+    let addCategory = $("#addCategory");
+    let addTransaction = $("#addTransaction");
+    let transactionHistory = $("#transactionHistory");
+
     // ...
     useEffect(() => {
         switch (location.pathname) {
             case "/":
-                $("#dashboard").css("cssText", "color:orange !important");
-                $("#addCategory").css("cssText", "color:white !important");
-                $("#addTransaction").css("cssText", "color:white !important");
-                $("#transactionHistory").css("cssText", "color:white !important");
+                dashboard.css("cssText", "color:orange !important");
+                addCategory.css("cssText", "color:white");
+                addTransaction.css("cssText", "color:white");
+                transactionHistory.css("cssText", "color:white");
                 break;
             case "/addCategory":
-                $("#dashboard").css("cssText", "color:white !important");
-                $("#addCategory").css("cssText", "color:orange !important");
-                $("#addTransaction").css("cssText", "color:white !important");
-                $("#transactionHistory").css("cssText", "color:white !important");
+                dashboard.css("cssText", "color:white");
+                addCategory.css("cssText", "color:orange !important");
+                addTransaction.css("cssText", "color:white");
+                transactionHistory.css("cssText", "color:white");
                 break;
             case "/addTransaction":
-                $("#dashboard").css("cssText", "color:white !important");
-                $("#addCategory").css("cssText", "color:white !important");
-                $("#addTransaction").css("cssText", "color:orange !important");
-                $("#transactionHistory").css("cssText", "color:white !important");
+                dashboard.css("cssText", "color:white");
+                addCategory.css("cssText", "color:white");
+                addTransaction.css("cssText", "color:orange !important");
+                transactionHistory.css("cssText", "color:white");
                 break;
             case "/transactionHistory":
-                $("#dashboard").css("cssText", "color:white !important");
-                $("#addCategory").css("cssText", "color:white !important");
-                $("#addTransaction").css("cssText", "color:white !important");
-                $("#transactionHistory").css("cssText", "color:orange !important");
+                dashboard.css("cssText", "color:white");
+                addCategory.css("cssText", "color:white");
+                addTransaction.css("cssText", "color:white");
+                transactionHistory.css("cssText", "color:orange !important");
                 break;
             default:
                 break;
